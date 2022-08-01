@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Impower.Queue.Activities.Models;
 
 namespace Impower.Queue.Activities.Utilities
 {
@@ -21,7 +22,11 @@ namespace Impower.Queue.Activities.Utilities
                 {
                     case TypeCode.Int32:
                         var ableToParse = Int32.TryParse(pair.Value.ToString(), out var parsed);
-                        RunningDictionary.Add(pair.Key, ableToParse ? (T)(object)parsed : (T)(object)null);
+                        if (!ableToParse) continue;
+                        RunningDictionary.Add(pair.Key,(T)(object)parsed);
+                        Console.WriteLine("added int ");
+                        
+
                         break;
                     case TypeCode.String:
                         if (String.IsNullOrEmpty(pair.Value.ToString())) { continue; }

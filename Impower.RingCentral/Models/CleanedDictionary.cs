@@ -12,14 +12,17 @@ namespace Impower.Queue.Activities.Models
     {
 
         private dynamic ConvertedDictionary { get; set; }
+        private Dictionary<string, object> SpecificContent { get; set; }
 
         public CleanedDictionary(Dictionary<string, object> specificContent, Type dictionaryType)
         {
-            
+            this.SpecificContent = specificContent;
+
             switch (Type.GetTypeCode(dictionaryType))
             {
                 case TypeCode.Int32:
                     this.ConvertedDictionary = Util.ConvertedDictionary<int>(specificContent);
+                    Console.WriteLine("YUP");
                     break;
                 case TypeCode.String:
                     this.ConvertedDictionary = Util.ConvertedDictionary<string>(specificContent);
@@ -28,14 +31,61 @@ namespace Impower.Queue.Activities.Models
                 default:
                     throw new Exception("Could not parse provided type. Please contact Matthew.");
             }
+            foreach(var item in specificContent)
+            {
+                if (!this.ContainsKey(item.Key))
+                {
+                    Console.WriteLine("angy");
+                   // ConvertedDictionary[item.Key] = null;
+
+                }
+            }
         }
 
+        public object this[object key] 
+        { 
+            get
+            {
+                Console.WriteLine("in get");
+                if (this.ContainsKey(key))
+                {
+                    foreach(var item in ConvertedDictionary.Keys)
+                    {
+                        Console.WriteLine(item);
+                    }
+                    Console.WriteLine(this.ConvertedDictionary[key]);
+                    return this.ConvertedDictionary[key];
+                }
+                Console.WriteLine("ayo?");
+                if (this.SpecificContent.ContainsKey(key.ToString())) return null;
+                Console.WriteLine("past");
+                throw new Exception("Key not in dictionary");
+            }
+            set
+            {
+                this[key] = value;
+            }
+        
+        
+        }
 
-        public object this[object key] { get => ConvertedDictionary[key]; set => global::System.Console.WriteLine(value); }
+        public ICollection Keys => SpecificContent.Keys;
 
-        public ICollection Keys => ConvertedDictionary.Keys.ToArray();
+        public bool ContainsKey(object key)
+        {
+            Console.WriteLine(this.ConvertedDictionary.Keys);
+            foreach(var existingKey in this.ConvertedDictionary.Keys)
+            {
+                if (existingKey.Equals(key))
+                {
+                    Console.WriteLine("has the key");
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        public ICollection Values => ConvertedDictionary.Values.ToArray();
+        public ICollection Values => ConvertedDictionary.Values;
 
         public bool IsReadOnly => false;
 
