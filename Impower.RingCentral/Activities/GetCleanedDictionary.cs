@@ -3,31 +3,35 @@ using System.Collections.Generic;
 using System.Activities;
 using System.ComponentModel;
 using System.Linq;
-using Impower.Queue.Activities.Models;
 
 namespace Impower.Queue.Activities.QueueItem
 {
-    public class GetCleanedDictionary : CodeActivity
+    public class GetCleanedDictionary<T> : CodeActivity
     {
 
         [Category("Input")]
         [RequiredArgument]
-        [DisplayName("QueueItem")]
-        public InArgument<UiPath.Core.QueueItem> QItem { get; set; }
+        [DisplayName("Dictionary")]
+        public InArgument<Dictionary<string, object>> InputDictionary { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
-        [DisplayName("OutputType")]
-        public InArgument<Type> GValue { get; set; }
+        [DisplayName("DefaultValue")]
+        public InArgument<T> DefaultValue { get; set; }
 
         [Category("Output")]
         [DisplayName("CleanedDictionary")]
-        public OutArgument<CleanedDictionary> CDictionary { get; set; }
+        public OutArgument<Dictionary<string, T>> CDictionary { get; set; }
 
         protected override void Execute(CodeActivityContext context)
         {
-            var CleanDict = new CleanedDictionary(QItem.Get(context).SpecificContent, GValue.Get(context));
-            CDictionary.Set(context, CleanDict);
+            var input = InputDictionary.Get(context);
+            var defaultValue = DefaultValue.Get(context);
+
+
+
+            Dictionary<string, T> output = input.ToDictionary(x => x.Key.ToString(), v => v.Value is T ? (T) v.Value : defaultValue);
+            CDictionary.Set(context, output);
         }
     }
 }
