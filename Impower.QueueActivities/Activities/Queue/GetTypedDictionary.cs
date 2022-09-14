@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Activities;
 using System.ComponentModel;
 using System.Linq;
-using Impower.Queue.Activities.Utilities;
+using Impower.Utility.Utilities;
 
-namespace Impower.Queue.Activities.Activities
+namespace Impower.Utility.Queue
 {
     public class GetTypedDictionary<T> : CodeActivity
     {
@@ -29,7 +29,7 @@ namespace Impower.Queue.Activities.Activities
             var input = InputDictionary.Get(context);
             var defaultValue = DefaultValue.Get(context);
 
-            var output = input.ConvertDictionary<T>(defaultValue);
+            var output = input.ConvertedDictionary(defaultValue);
             CDictionary.Set(context, output);
         }
 

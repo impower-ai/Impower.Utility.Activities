@@ -4,7 +4,7 @@ using System.Activities;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Impower.Queue.Activities.Activities
+namespace Impower.Utility.Queue
 {
     public class GenerateQueueItem : CodeActivity
     {
@@ -12,7 +12,7 @@ namespace Impower.Queue.Activities.Activities
         [Category("Input")]
         [DisplayName("Items")]
         [RequiredArgument]
-        public InArgument<IEnumerable<Object>> Items { get; set; }
+        public InArgument<IEnumerable<object>> Items { get; set; }
 
         [Category("Output")]
         [DisplayName("QueueItem")]
