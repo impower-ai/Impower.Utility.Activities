@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Activities;
 using System.ComponentModel;
+using Impower.Queue.Activities.Utilities;
 using System.Linq;
 
-namespace Impower.Queue.Activities.QueueItem
+namespace Impower.Queue.Activities.Activities
 {
-    public class GetCleanedDictionary<T> : CodeActivity
+    public class GetTypedDictonaryFromQueueItem<T> : CodeActivity
     {
 
         [Category("Input")]
         [RequiredArgument]
-        [DisplayName("Dictionary")]
-        public InArgument<Dictionary<string, object>> InputDictionary { get; set; }
+        [DisplayName("Queue Item")]
+        public InArgument<UiPath.Core.QueueItem> InputDictionary { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
@@ -28,10 +29,10 @@ namespace Impower.Queue.Activities.QueueItem
             var input = InputDictionary.Get(context);
             var defaultValue = DefaultValue.Get(context);
 
+            var output = input.ConvertSpecificContent<T>(defaultValue);
 
-
-            Dictionary<string, T> output = input.ToDictionary(x => x.Key.ToString(), v => v.Value is T ? (T) v.Value : defaultValue);
             CDictionary.Set(context, output);
         }
+
     }
 }
