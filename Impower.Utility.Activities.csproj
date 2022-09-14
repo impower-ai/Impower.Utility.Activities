@@ -3,7 +3,7 @@
   <PropertyGroup>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	  <TargetFramework>net461</TargetFramework>
-	  <Version>2.0.5</Version>
+	  <Version>2.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>

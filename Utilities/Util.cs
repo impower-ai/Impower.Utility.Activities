@@ -25,7 +25,7 @@ namespace Impower.Utility.Utilities
             }
             catch (Exception e)
             {
-                return defaultValue;
+                return defaultValue; 
             }
 
         }
