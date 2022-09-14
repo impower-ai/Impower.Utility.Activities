@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Activities;
 using System.ComponentModel;
-using Impower.Queue.Activities.Utilities;
+using Impower.Utility.Utilities;
 using System.Linq;
 
-namespace Impower.Queue.Activities.Activities
+namespace Impower.Utility.Queue
 {
     public class GetTypedDictonaryFromQueueItem<T> : CodeActivity
     {
@@ -13,7 +13,7 @@ namespace Impower.Queue.Activities.Activities
         [Category("Input")]
         [RequiredArgument]
         [DisplayName("Queue Item")]
-        public InArgument<UiPath.Core.QueueItem> InputDictionary { get; set; }
+        public InArgument<UiPath.Core.QueueItem> InputQueueItem { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
@@ -26,10 +26,10 @@ namespace Impower.Queue.Activities.Activities
 
         protected override void Execute(CodeActivityContext context)
         {
-            var input = InputDictionary.Get(context);
+            var input = InputQueueItem.Get(context);
             var defaultValue = DefaultValue.Get(context);
 
-            var output = input.ConvertSpecificContent<T>(defaultValue);
+            var output = input.ConvertedSpecificContent(defaultValue);
 
             CDictionary.Set(context, output);
         }
