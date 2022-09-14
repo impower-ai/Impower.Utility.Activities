@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Impower.Utility.Queue
 {
-    public class GetTypedDictonaryFromQueueItem<T> : CodeActivity
+    public class GetTypedDictionaryFromQueueItem<T> : CodeActivity
     {
 
         [Category("Input")]
