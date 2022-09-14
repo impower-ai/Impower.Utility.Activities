@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="UiPath.System.Activities" Version="22.4.1" />
   </ItemGroup>
 
@@ -18,10 +24,5 @@
 	<ItemGroup>
     <Reference Include="System.Activities" />
   </ItemGroup>
-
-
-	<ItemGroup>
-	  <Folder Include="Models\" />
-	</ItemGroup>
 
 </Project>
