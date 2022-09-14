@@ -4,7 +4,7 @@ using System.Activities;
 using System.ComponentModel;
 using System.Linq;
 
-namespace Impower.Queue.Activities.QueueItem
+namespace Impower.Queue.Activities.Activities
 {
     public class GenerateQueueItem : CodeActivity
     {
