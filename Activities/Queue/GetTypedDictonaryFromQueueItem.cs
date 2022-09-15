@@ -4,10 +4,11 @@ using System.Activities;
 using System.ComponentModel;
 using Impower.Utility.Utilities;
 using System.Linq;
+using Impower.Utility.Activities;
 
 namespace Impower.Utility.Queue
 {
-    public class GetTypedDictionaryFromQueueItem<T> : CodeActivity
+    public class GetTypedDictionaryFromQueueItem<T> : UtilityActivity
     {
 
         [Category("Input")]

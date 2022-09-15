@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Activities;
 using System.ComponentModel;
 using System.Linq;
+using Impower.Utility.Activities;
 
 namespace Impower.Utility.Queue
 {
-    public class GenerateQueueItem : CodeActivity
+    public class GenerateQueueItem : UtilityActivity
     {
 
         [Category("Input")]

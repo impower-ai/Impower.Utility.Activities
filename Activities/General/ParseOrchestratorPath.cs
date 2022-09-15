@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using Impower.Utility.Utilities;
 using System.IO;
+using Impower.Utility.Activities;
 
 namespace Impower.Utility.General
 {
-    public class ParseOrchestratorPath : CodeActivity
+    public class ParseOrchestratorPath : UtilityActivity
     {
         [Category("Input")]
         [RequiredArgument]
