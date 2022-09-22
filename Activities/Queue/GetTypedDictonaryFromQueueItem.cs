@@ -5,10 +5,11 @@ using System.ComponentModel;
 using Impower.Utility.Utilities;
 using System.Linq;
 using Impower.Utility.Activities;
+using Impower.Utility.Models;
 
 namespace Impower.Utility.Queue
 {
-    public class GetTypedDictionaryFromQueueItem<T> : UtilityActivity
+    public class GetTypedDictionaryFromQueueItem<T> : TypedDictionaryActivity<T>
     {
 
         [Category("Input")]
@@ -16,14 +17,9 @@ namespace Impower.Utility.Queue
         [DisplayName("Queue Item")]
         public InArgument<UiPath.Core.QueueItem> InputQueueItem { get; set; }
 
-        [Category("Input")]
-        [RequiredArgument]
-        [DisplayName("DefaultValue")]
-        public InArgument<T> DefaultValue { get; set; }
+        public override InArgument<T> DefaultValue { get; set; }
 
-        [Category("Output")]
-        [DisplayName("CleanedDictionary")]
-        public OutArgument<Dictionary<string, T>> CDictionary { get; set; }
+        public override OutArgument<Dictionary<string, T>> Dictionary { get; set; }
 
         protected override void Execute(CodeActivityContext context)
         {
@@ -32,7 +28,7 @@ namespace Impower.Utility.Queue
 
             var output = input.ConvertedSpecificContent(defaultValue);
 
-            CDictionary.Set(context, output);
+            Dictionary.Set(context, output);
         }
 
     }
