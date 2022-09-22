@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.Linq;
 using Impower.Utility.Activities;
 using Impower.Utility.Utilities;
+using Impower.Utility.Models;
 
 namespace Impower.Utility.Queue
 {
-    public class GetTypedDictionary<T> : UtilityActivity
+    public class GetTypedDictionary<T> : TypedDictionaryActivity<T>
     {
 
         [Category("Input")]
@@ -16,14 +17,9 @@ namespace Impower.Utility.Queue
         [DisplayName("Dictionary")]
         public InArgument<Dictionary<string, object>> InputDictionary { get; set; }
 
-        [Category("Input")]
-        [RequiredArgument]
-        [DisplayName("DefaultValue")]
-        public InArgument<T> DefaultValue { get; set; }
+        public override InArgument<T> DefaultValue { get; set; }
 
-        [Category("Output")]
-        [DisplayName("CleanedDictionary")]
-        public OutArgument<Dictionary<string, T>> CDictionary { get; set; }
+        public override OutArgument<Dictionary<string, T>> Dictionary { get; set; }
 
         protected override void Execute(CodeActivityContext context)
         {
@@ -31,7 +27,7 @@ namespace Impower.Utility.Queue
             var defaultValue = DefaultValue.Get(context);
 
             var output = input.ConvertedDictionary(defaultValue);
-            CDictionary.Set(context, output);
+            Dictionary.Set(context, output);
         }
 
     }
