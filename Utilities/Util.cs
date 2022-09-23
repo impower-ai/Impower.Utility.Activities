@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using UiPath.Core;
+using System.IO;
 
 namespace Impower.Utility.Utilities
 {
@@ -18,6 +19,18 @@ namespace Impower.Utility.Utilities
         public static Dictionary<string, object> ToDictionary(this DataRow dataRow)
         {
             return dataRow.Table.Columns.Cast<DataColumn>().ToDictionary(column => column.ColumnName, columnValue => dataRow[columnValue]);
+        }
+
+        public static string OrchestratorFolder(this String path)
+        {
+            if (path == null || string.IsNullOrEmpty(path)) return null;
+            return Path.GetDirectoryName(path).Replace("\\", "/");
+        }
+
+        public static string OrchestratorName(this String path)
+        {
+            if (path == null || string.IsNullOrEmpty(path)) return null;
+            return Path.GetFileName(path);
         }
 
         public static Dictionary<string, T> ToTypedDictionary<T>(this DataRow dataRow, T defaultValue)
