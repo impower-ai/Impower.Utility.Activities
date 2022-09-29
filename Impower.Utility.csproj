@@ -1,22 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<TargetFramework>net461</TargetFramework>
+		<Version>2.1.1</Version>
+		<PackageID>Impower.Utility.Activities</PackageID>
+	</PropertyGroup>
 
-  <PropertyGroup>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <TargetFramework>net461</TargetFramework>
-	  <Version>2.1.1</Version>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="UiPath.System.Activities" Version="22.4.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="UiPath.System.Activities" Version="22.4.1" />
+	</ItemGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<OutputPath>C:\LocalNuget\</OutputPath>
 	</PropertyGroup>
 
-
 	<ItemGroup>
-    <Reference Include="System.Activities" />
-  </ItemGroup>
+		<Reference Include="System.Activities" />
+	</ItemGroup>
 
 </Project>
